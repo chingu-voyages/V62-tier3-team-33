@@ -22,6 +22,7 @@ You may find these helpful as you work together to organize your project.
 - [Backend Architecture](./docs/backend-architecture.md) (#22)
 - [Frontend–Backend Communication](./docs/frontend-backend-communication.md) (#23)
 - [Frontend Architecture](./docs/frontend-architecture.md) (#21)
+- [Application Architecture and Data Flow](./docs/application-architecture.md) (#26)
 
 Meeting Agenda templates (located in the `/docs` directory in this repo):
 
