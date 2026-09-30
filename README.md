@@ -19,6 +19,7 @@ You may find these helpful as you work together to organize your project.
 
 - [Team Project Ideas](./docs/team_project_ideas.md)
 - [Team Decision Log](./docs/team_decision_log.md)
+- [Backend Architecture](./docs/backend-architecture.md) (#22)
 
 Meeting Agenda templates (located in the `/docs` directory in this repo):
 
