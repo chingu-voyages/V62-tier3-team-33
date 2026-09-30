@@ -36,5 +36,4 @@ coding!
 
 - John Omokhagbon Ezekiel: [GitHub](https://github.com/Sirius1616) / [LinkedIn](https://linkedin.com/in/john-ezekiel-dev)
 - Shivanand Gupta (as Svont) : [GitHub](https://github.com/Shivanand-0) / [LinkedIn](https://www.linkedin.com/in/ishivanandgupta/)
-- Kervintz Noel (as Kervcodes) #n: [GitHub](https://github.com/kervcodes) / [LinkedIn](https://linkedin.com/in/kervintznoel)
 - Rodiel Martinez Jimenez: [GitHub](https://github.com/Rodielm) / [LinkedIn](https://www.linkedin.com/in/rodielmj)
