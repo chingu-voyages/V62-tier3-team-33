@@ -82,7 +82,13 @@ export function LearningPathForm({ onSubmit }: LearningPathFormProps) {
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
     setTouched(Object.fromEntries(fieldNames.map((name) => [name, true])))
-    if (fieldNames.some((name) => validators[name](state))) return
+    const firstInvalid = fieldNames.find((name) => validators[name](state))
+    if (firstInvalid) {
+      // Field names match the inputs' `name` attribute; focus the first one so the error is announced.
+      const control = event.currentTarget.elements.namedItem(firstInvalid)
+      if (control instanceof HTMLElement) control.focus()
+      return
+    }
 
     const timeframeValue = state.timeframeValue.trim()
     onSubmit({
