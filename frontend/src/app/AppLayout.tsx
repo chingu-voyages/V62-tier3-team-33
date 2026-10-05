@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router'
+import { Container } from '@/shared/components/Container'
 import { Footer } from './Footer'
 import { Header } from './Header'
 
@@ -7,8 +8,10 @@ export function AppLayout() {
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="mx-auto w-full max-w-5xl flex-1 p-4">
-        <Outlet />
+      <main className="flex-1 py-6">
+        <Container>
+          <Outlet />
+        </Container>
       </main>
       <Footer />
     </div>

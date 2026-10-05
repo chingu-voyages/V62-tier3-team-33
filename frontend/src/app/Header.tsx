@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router'
+import { Container } from '@/shared/components/Container'
 
 const navItems = [
   { to: '/', label: 'Home', end: true },
@@ -8,7 +9,7 @@ const navItems = [
 export function Header() {
   return (
     <header className="border-b">
-      <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-2 p-4">
+      <Container className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 py-4">
         <Link to="/" className="font-semibold">
           Learning Path Generator
         </Link>
@@ -24,7 +25,7 @@ export function Header() {
             </NavLink>
           ))}
         </nav>
-      </div>
+      </Container>
     </header>
   )
 }
