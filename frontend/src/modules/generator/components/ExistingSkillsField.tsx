@@ -1,28 +1,27 @@
 import { Input } from '@/shared/components/ui/input'
-import { CAREER_GOAL_MAX_LENGTH } from '../validation'
+import { EXISTING_SKILLS_MAX_LENGTH } from '../validation'
 import { FormField } from './FormField'
 
-interface CareerGoalFieldProps {
+interface ExistingSkillsFieldProps {
   value: string
   onChange: (value: string) => void
   onBlur?: () => void
   error?: string
 }
 
-export function CareerGoalField({ value, onChange, onBlur, error }: CareerGoalFieldProps) {
+export function ExistingSkillsField({ value, onChange, onBlur, error }: ExistingSkillsFieldProps) {
   return (
-    <FormField label="Career goal" error={error}>
+    <FormField label="Existing skills (optional)" error={error}>
       {(controlProps) => (
         <Input
           {...controlProps}
-          name="careerGoal"
+          name="existingSkills"
           value={value}
           onChange={(event) => onChange(event.target.value)}
           onBlur={onBlur}
-          placeholder="e.g. Backend Developer, Data Scientist, UX Designer"
-          maxLength={CAREER_GOAL_MAX_LENGTH}
+          placeholder="e.g. HTML, CSS, JavaScript, Git"
+          maxLength={EXISTING_SKILLS_MAX_LENGTH}
           autoComplete="off"
-          aria-required="true"
         />
       )}
     </FormField>

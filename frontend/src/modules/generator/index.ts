@@ -1,2 +1,2 @@
 export { LearningPathForm } from './components/LearningPathForm'
-export type { LearningPathFormValues } from './types'
+export type { LearningPathFormValues, SkillLevel } from './types'
