@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router'
 import { Container } from '@/shared/components/Container'
+import { Footer } from './Footer'
 import { Header } from './Header'
 
 // Single shell for public and authenticated routes; guards wrap children, not the layout.
@@ -12,9 +13,7 @@ export function AppLayout() {
           <Outlet />
         </Container>
       </main>
-      <footer className="border-t">
-        <Container className="py-4 text-sm text-muted-foreground">Chingu V62 Team 33</Container>
-      </footer>
+      <Footer />
     </div>
   )
 }
