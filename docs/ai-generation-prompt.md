@@ -129,3 +129,83 @@ Rendering rules:
 - The model is asked for JSON **and** constrained to it by the provider's structured
   output mode (§5 of [AI Provider Selection](./ai-provider-selection.md)); the prompt
   wording is belt and braces, not the only defence.
+
+---
+
+## 4. Expected Milestone Content
+
+This is what "a good milestone" means, so that #95's schema, #96's prompt, and the
+reviewer of a generated path all judge the same thing.
+
+| Aspect | Expectation |
+| :--- | :--- |
+| **Title** | Imperative, specific, and outcome-shaped: what will be *built* or *demonstrated*. ≤ 60 chars. No "Introduction to…" filler and no topic so broad it cannot be finished. |
+| **Description** | 2–4 sentences covering (a) what is learned, (b) why it matters for `career_goal`, (c) the observable outcome — a project, a working skill, a proof point. |
+| **Estimated time** | Hours, > 0, realistic for the learner's `hours_per_week`. A milestone that needs 30 h for someone with 5 h/week is wrong even if the number is plausible in isolation. |
+| **Order** | Strictly sequential: starts at 1, increments by 1, no gaps, no duplicates. Milestone *n* assumes milestone *n−1* is done. |
+| **Coverage** | The set as a whole moves the learner from their `skill_level` + `existing_skills` to `career_goal` — no missing critical step, no padding. |
+| **Fit** | Total hours fit `target_timeframe` when given (rule 4 of the system prompt); otherwise the 40–120 hour default. |
+
+Path-level metadata returned alongside the milestones:
+
+- `title` — the path named as the learner would call it (≤ 80 chars).
+- `goal` — the destination restated in one sentence (≤ 200 chars), used by the
+  dashboard and the learning path page.
+
+The exact field names and types are frozen in #95 (and its tasks #99–#102); this
+document owns the *meaning*, #95 owns the *shape*.
+
+---
+
+## 5. Guardrails
+
+| Risk | Mitigation |
+| :--- | :--- |
+| Model returns prose or fenced JSON | Structured output mode constrains decoding to the schema (#95); `parser.py` re-validates and raises `AIProviderError` instead of persisting bad data (#108) |
+| Malformed or missing fields | Server-side validation of required fields and `order` sequencing (#102, #103) |
+| Prompt injection via form text | Rule 7: learner text is data; values are length-capped (§2) and rendered inside labelled lines, never merged into instructions |
+| Oversized or runaway output | 4–8 milestone bound, per-field length caps, `AI_TIMEOUT_SECONDS` (#109) |
+| Provider quota/latency spikes | Bounded retries then `RateLimitError`/`AIProviderError` — see §5 of [AI Provider Selection](./ai-provider-selection.md) (#107, #111) |
+| Secrets in the request | Only the six form fields are sent; no user identifiers, no API keys (§2) |
+
+---
+
+## 6. How #96 Uses This Document
+
+```python
+# backend/app/infrastructure/ai/prompts.py
+SYSTEM_PROMPT = """..."""          # §3.1, verbatim
+
+def render_user_prompt(context: GenerationContext) -> str:
+    ...                            # §3.2 rendering rules
+```
+
+- `prompts.py` holds strings only — no provider SDK import, so it stays importable in
+  unit tests with no key (architecture §4.5, §4.7).
+- `LearningPathService` builds `GenerationContext` from the request; the provider
+  adapter (#96) concatenates system + user prompt and requests the structured schema.
+- A unit test asserts that rendering a known context contains every §2 variable — the
+  executable version of acceptance criterion 2.
+
+---
+
+## 7. Definition of Done for this Issue
+
+- [x] Prompt template exists — §3
+- [x] All personalisation fields are represented — §2 (all six form fields, with
+      limits from `validation.ts`)
+- [x] Expected milestone content is described — §4
+- [ ] Reviewed and approved by the team
+- [ ] Reconciled with #95 when the response schema is frozen (field names must match)
+
+## 8. Related Issues
+
+| Issue | Relationship |
+| :--- | :--- |
+| #60 / #89–#92 | Parent epic and stories this prompt serves |
+| #93 | Provider decision — which model receives this prompt ([AI Provider Selection](./ai-provider-selection.md)) |
+| #95 | Freezes the response schema this prompt asks for (#99–#102 define its fields) |
+| #96 | Implements `prompts.py` from §6 |
+| #97 | Endpoint that triggers a generation with these inputs |
+| #102/#103 | Validate what this prompt asks the model to return |
+| #107–#109 | Failure modes for a bad or slow response |
