@@ -39,5 +39,5 @@ you like the best.
 | 7	| Who works in which part of the app? | | | | | | |
 |   | - BE (not applicable for Tier 1 teams) | | | | | | |
 |   |	- FE | | | | | | |
-| 8	| ... | | | | | | |
+| 8	| AI provider for learning path generation (#93) | Gemini (Flash) — decided, see [AI Provider Selection](./ai-provider-selection.md) | | | | | |
 | n | ... | | | | | | |
