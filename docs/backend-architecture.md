@@ -28,7 +28,8 @@ document updated in the same PR.
 
 ### Non-goals
 
-- Choosing the AI provider (see #93). This doc only defines the seam where it plugs in.
+- Choosing the AI provider (see #93 — decided in [AI Provider Selection](./ai-provider-selection.md)).
+  This doc only defines the seam where it plugs in.
 - Defining the wire format of every endpoint (see #38, API contract).
 - Final data model design (see #39, PostgreSQL schema).
 - Deployment topology and hosting (see #69, Application Deployment).
@@ -400,7 +401,7 @@ All configuration via environment variables, read in `core/config.py` (pydantic-
 | Variable | Purpose | Notes |
 | :--- | :--- | :--- |
 | `DATABASE_URL` | PostgreSQL DSN | required |
-| `AI_PROVIDER` | `openai` \| `gemini` \| `fake` | defaults to `fake` locally |
+| `AI_PROVIDER` | `openai` \| `gemini` \| `fake` | defaults to `fake` locally; selected provider is `gemini`, see [AI Provider Selection](./ai-provider-selection.md) |
 | `AI_API_KEY` | Provider credential | required when provider != `fake`; **never logged** |
 | `AI_MODEL` | Model identifier | provider-specific default |
 | `AI_TIMEOUT_SECONDS` | Generation timeout | bounded; drives #109 |
@@ -483,7 +484,7 @@ To resolve in Sprint 3; owners to be assigned in the next stand-up.
 | #34 | *Setup FastAPI project* — realises the structure in §3 |
 | #38 | *Define API contract* — consumes the schemas layer |
 | #39 | *Design PostgreSQL schema* — realises the persistence section |
-| #93 / #96 | *Select AI provider* / *Implement AI client* — plug into §7 |
+| #93 / #96 | *Select AI provider* (decision in [AI Provider Selection](./ai-provider-selection.md)) / *Implement AI client* — plug into §7 |
 | #95 | *Define structured AI response schema* — the `GeneratedPath` shape in §7.5 |
 | #107–#109 | Provider error, timeout, malformed response — realise the error mapping |
 | #21 / #23 / #25 | Frontend architecture, FE↔BE communication, provider integration |
