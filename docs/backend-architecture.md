@@ -487,6 +487,7 @@ To resolve in Sprint 3; owners to be assigned in the next stand-up.
 | #95 | *Define structured AI response schema* — the `GeneratedPath` shape in §7.5 |
 | #107–#109 | Provider error, timeout, malformed response — realise the error mapping |
 | #21 / #23 / #25 | Frontend architecture, FE↔BE communication, provider integration |
+| #94 | *Define AI generation prompt* — the text `prompts.py` holds, defined in [AI Generation Prompt](./ai-generation-prompt.md) |
 
 ---
 
